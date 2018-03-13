@@ -1,0 +1,38 @@
+{
+  "name": "@twlv/transport-sockjs",
+  "version": "0.1.0",
+  "description": "twlv transport sockjs",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha test/**",
+    "coverage": "nyc --reporter=lcov npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twlv/twlv-transport-sockjs.git"
+  },
+  "author": "Ganesha <reekoheek@gmail.com> (http://sagara.id)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twlv/twlv-transport-sockjs/issues"
+  },
+  "homepage": "https://github.com/twlv/twlv-transport-sockjs#readme",
+  "devDependencies": {
+    "@twlv/core": "^0.2.4",
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.18.2",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-xinix": "^1.0.4",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^5.0.2",
+    "nyc": "~11.4.1"
+  },
+  "dependencies": {
+    "sockjs": "^0.3.19",
+    "sockjs-client": "^1.1.4"
+  }
+}
