@@ -18,14 +18,6 @@ class SockJsDialer {
         let socket = new ClientSocket(sock);
         resolve(socket);
       };
-
-      // sock.onmessage = evt => {
-      //   console.log('on message', evt.data);
-      // };
-
-      // sock.onclose = () => {
-      //   console.log('on close');
-      // };
     });
 
     return socket;
