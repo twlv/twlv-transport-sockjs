@@ -21,7 +21,7 @@ describe('SockJs Transport', () => {
 
       await new Promise(async (resolve, reject) => {
         try {
-          node2.on('message', async message => {
+          node2.on('message', message => {
             try {
               assert.equal(message.command, 'foo');
               assert.equal(message.payload.toString(), 'bar');
