@@ -1,5 +1,5 @@
 const SockJS = require('sockjs-client');
-const { URL } = require('url');
+const url = require('url');
 const { ClientSocket } = require('./socket');
 
 class SockJsDialer {
@@ -7,8 +7,8 @@ class SockJsDialer {
     this.proto = 'sockjs';
   }
 
-  async dial (url) {
-    let urlO = new URL(url);
+  async dial (urlString) {
+    let urlO = url.parse(urlString);
 
     let socket;
     try {
@@ -17,7 +17,7 @@ class SockJsDialer {
       try {
         socket = await this._tryCreateSocket(`http://${urlO.host}${urlO.pathname}`);
       } catch (err) {
-        throw new Error(`Failed connect to url ${url}`);
+        throw new Error(`Failed connect to url ${urlString}`);
       }
     }
     return socket;

@@ -1,6 +1,6 @@
 {
   "name": "@twlv/transport-sockjs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "twlv transport sockjs",
   "main": "index.js",
   "scripts": {
