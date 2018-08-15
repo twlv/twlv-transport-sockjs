@@ -1,6 +1,7 @@
 const SockJS = require('sockjs-client');
 const url = require('url');
 const { ClientSocket } = require('./socket');
+const debug = require('debug')('twlv:transport-sockjs:dialer');
 
 class SockJsDialer {
   constructor () {
@@ -20,6 +21,7 @@ class SockJsDialer {
         throw new Error(`Failed connect to url ${urlString}`);
       }
     }
+
     return socket;
   }
 
@@ -29,6 +31,7 @@ class SockJsDialer {
       sock.onopen = () => {
         sock.onclose = undefined;
         let socket = new ClientSocket(sock);
+
         resolve(socket);
       };
 
@@ -38,6 +41,10 @@ class SockJsDialer {
           err.code = evt.code;
           return reject(err);
         }
+      };
+
+      sock.onerror = err => {
+        debug('SockJsDialer socket caught err: %s', err.stack);
       };
     });
   }
