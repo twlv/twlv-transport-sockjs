@@ -7,7 +7,7 @@
     "lint": "eslint .",
     "test": "mocha test/**",
     "coverage": "nyc --reporter=lcov npm test",
-    "pre-commit": "npm run lint && npm test"
+    "precommit": "npm run lint && npm test"
   },
   "repository": {
     "type": "git",
