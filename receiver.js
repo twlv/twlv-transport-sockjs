@@ -4,14 +4,13 @@ const http = require('http');
 const sockjs = require('sockjs');
 const os = require('os');
 
-class SockJsListener extends EventEmitter {
+class SockJsReceiver extends EventEmitter {
   constructor ({ server, prefix = '/_twlv' } = {}) {
     super();
 
     this.proto = 'sockjs';
     this.prefix = prefix;
-    this._server = server;
-    // this._onMessage = this._onMessage.bind(this);
+    this.specifiedServer = server;
   }
 
   get urls () {
@@ -32,8 +31,8 @@ class SockJsListener extends EventEmitter {
 
   async up () {
     await new Promise((resolve, reject) => {
-      if (this._server) {
-        this.server = this._server;
+      if (this.specifiedServer) {
+        this.server = this.specifiedServer;
         resolve();
       } else {
         this.server = http.createServer();
@@ -59,11 +58,11 @@ class SockJsListener extends EventEmitter {
     this._requestListeners.forEach(listener => this.server.addListener(listener));
     this._upgradeListeners.forEach(listener => this.server.addListener(listener));
 
-    if (!this._server) {
+    if (!this.specifiedServer) {
       this.server.close();
     }
     this.server = undefined;
   }
 }
 
-module.exports = { SockJsListener };
+module.exports = { SockJsReceiver };

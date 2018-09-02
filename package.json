@@ -1,6 +1,6 @@
 {
   "name": "@twlv/transport-sockjs",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "twlv transport sockjs",
   "main": "index.js",
   "scripts": {
@@ -20,21 +20,25 @@
   },
   "homepage": "https://github.com/twlv/twlv-transport-sockjs#readme",
   "devDependencies": {
-    "@twlv/core": "^0.2.11",
-    "babel-eslint": "^8.2.6",
-    "eslint": "^5.3.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-config-xinix": "^1.1.0",
+    "@twlv/core": "^1.0.1",
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.5.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-xinix": "^1.1.2",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0",
     "husky": "^0.14.3",
     "mocha": "^5.2.0",
-    "nyc": "^12.0.2"
+    "nyc": "^13.0.1"
   },
   "dependencies": {
+    "debug": "^3.1.0",
     "sockjs": "^0.3.19",
     "sockjs-client": "^1.1.5"
+  },
+  "peerDependencies": {
+    "@twlv/core": "^1.0.0"
   }
 }

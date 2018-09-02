@@ -1,4 +1,4 @@
 const { SockJsDialer } = require('./dialer');
-const { SockJsListener } = require('./listener');
+const { SockJsReceiver } = require('./receiver');
 
-module.exports = { SockJsDialer, SockJsListener };
+module.exports = { SockJsDialer, SockJsReceiver };

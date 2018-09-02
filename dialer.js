@@ -4,25 +4,41 @@ const { ClientSocket } = require('./socket');
 const debug = require('debug')('twlv:transport-sockjs:dialer');
 
 class SockJsDialer {
-  constructor () {
+  constructor ({ secure = 'auto' } = {}) {
     this.proto = 'sockjs';
+    this.secure = secure;
+  }
+
+  up () {
+    // noop
+  }
+
+  down () {
+    // noop
   }
 
   async dial (urlString) {
-    let urlO = url.parse(urlString);
+    let { host, pathname } = url.parse(urlString);
 
-    let socket;
-    try {
-      socket = await this._tryCreateSocket(`https://${urlO.host}${urlO.pathname}`);
-    } catch (err) {
+    if (this.secure === 'auto' || this.secure === true) {
       try {
-        socket = await this._tryCreateSocket(`http://${urlO.host}${urlO.pathname}`);
+        let socket = await this._tryCreateSocket(`https://${host}${pathname}`);
+        return socket;
+      } catch (err) {
+        if (this.secure === true) {
+          throw new Error(`Failed connect to url ${urlString}`);
+        }
+      }
+    }
+
+    if (this.secure === 'auto' || this.secure === false) {
+      try {
+        let socket = await this._tryCreateSocket(`http://${host}${pathname}`);
+        return socket;
       } catch (err) {
         throw new Error(`Failed connect to url ${urlString}`);
       }
     }
-
-    return socket;
   }
 
   _tryCreateSocket (url) {

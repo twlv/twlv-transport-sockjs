@@ -1,6 +1,6 @@
 const { Node } = require('@twlv/core');
 const { MemoryFinder } = require('@twlv/core/finders/memory');
-const { SockJsDialer, SockJsListener } = require('..');
+const { SockJsDialer, SockJsReceiver } = require('..');
 const assert = require('assert');
 
 describe('SockJs Transport', () => {
@@ -12,7 +12,7 @@ describe('SockJs Transport', () => {
     let node2 = new Node();
 
     node1.addDialer(new SockJsDialer());
-    node2.addListener(new SockJsListener());
+    node2.addReceiver(new SockJsReceiver());
     node1.addFinder(new MemoryFinder());
     node2.addFinder(new MemoryFinder());
 
@@ -20,7 +20,9 @@ describe('SockJs Transport', () => {
       await node1.start();
       await node2.start();
 
-      // await node1.connect(node2.advertisement.urls[0]);
+      // await new Promise(resolve => setTimeout(resolve, 1000));
+
+      await node1.connect(node2.advertisement.urls[0]);
 
       await new Promise(async (resolve, reject) => {
         try {
@@ -44,8 +46,8 @@ describe('SockJs Transport', () => {
         }
       });
     } finally {
-      await node1.stop();
-      await node2.stop();
+      try { await node1.stop(); } catch (err) { /* noop */ }
+      try { await node2.stop(); } catch (err) { /* noop */ }
     }
   });
 
@@ -54,7 +56,7 @@ describe('SockJs Transport', () => {
     let node2 = new Node();
 
     node1.addDialer(new SockJsDialer());
-    node2.addListener(new SockJsListener());
+    node2.addReceiver(new SockJsReceiver());
     node1.addFinder(new MemoryFinder());
     node2.addFinder(new MemoryFinder());
 
